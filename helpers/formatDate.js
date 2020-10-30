@@ -7,7 +7,6 @@ module.exports = function formatDate(date) {
       day: "numeric",
       hour: "numeric",
       minute: "numeric",
-      second: "numeric",
     }).format(date);
   } catch (e) {
     return "invalid date";
