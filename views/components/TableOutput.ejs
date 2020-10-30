@@ -1,0 +1,36 @@
+<div class="table-component">
+    <%
+    if (paginateBy && Object.keys(pages).length > 1) { %>
+        <div class="btn-container">
+            <% for (let index of Object.keys(pages)) { %>
+                <button onclick="<%= name %>SetActive('<%= index %>')" class="<%= name %>-btn-<%= index %>"><%= index %></button>
+            <% } %>
+        </div>
+    <% }
+    for (let index of Object.keys(pages)) { %>
+        <table class="<%= name %> <%= paginateBy ? "page" : "" %> <%= name %>-page-<%= index %>">
+            <tr>
+                <% if (header) { %>
+                    <% header.forEach(heading => {%>
+                        <th>
+                            <%= heading %>
+                        </th>
+                    <% }) %>
+                <% } %>
+            </tr>
+            <% pages[index].forEach(item => {%>
+                <tr>
+                    <% let colCount = 0;
+                    for(let field in item) { 
+                        if (colCount === limitCols) {
+                            break;
+                        }
+                        colCount++;
+                        %>
+                        <td class="<%= field %>-cell"><%- item[field] %></td>
+                    <% } %>
+                </tr>
+            <% }) %>
+        </table>
+    <% } %>
+</div>

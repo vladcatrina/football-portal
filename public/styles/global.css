@@ -1,0 +1,132 @@
+body {
+  background-color: #ddd;
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+  width: 80%;
+  margin: auto;
+  color: #333;
+  font-size: large;
+}
+
+a {
+  color: darkgreen;
+  text-decoration: none;
+}
+
+a:hover {
+  color: green;
+}
+
+navbar {
+  display: block;
+  margin: 12px 0;
+  font-size: larger;
+}
+
+table {
+  background-color: #efefef;
+  border-collapse: collapse;
+  width: 100%;
+  box-shadow: 1px 1px 2px 1px rgb(0, 0, 0, 0.2);
+}
+
+.data-container {
+  background-color: #efefefd2;
+  box-shadow: 1px 1px 2px 1px rgb(0, 0, 0, 0.2);
+  padding: 12px;
+}
+
+tr:hover td {
+  background-color: #fff;
+}
+
+td, th {
+  padding: 2px;
+}
+
+td:first-child,
+th:first-child {
+  padding-left: 12px;
+}
+
+th {
+  text-align: left;
+}
+
+.page {
+  display: none;
+}
+.visible {
+  display: table;
+}
+
+button.active {
+  opacity: 0.3;
+}
+
+button {
+  box-shadow: 1px 1px 2px 1px rgb(0, 0, 0, 0.1);
+  border: solid 1px #ccc;
+  font-weight: bold;
+  padding: 4px;
+}
+
+textarea {
+  display: block;
+  width: 240px;
+  height: 100px;
+  font-family: inherit;
+}
+
+.btn-container {
+  width: 100%;
+}
+
+.table-component {
+  margin-bottom: 12px;
+}
+
+.navbar-background {
+  z-index: -1;
+  background-color: darkgreen;
+  opacity: 0.2;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 240px;
+}
+
+navbar a {
+  font-weight: bold;
+}
+
+footer {
+  margin: 60px 0 20px 0;
+} 
+
+span.date {
+  font-size: smaller;
+}
+
+td.score-cell {
+  min-width: 40px;
+}
+
+@media only screen and (max-width: 600px) {
+  body {
+    font-size: smaller;
+    width: 95%;
+  }
+
+  button {
+    font-size: smaller;
+  }
+
+  .crest-cell img {
+    display: none;
+  }
+
+  .replies-cell {
+    min-width: 30px;
+  }
+}

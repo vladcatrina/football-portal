@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<%- include("components/head", { title: `Team - ${teamData.name}`, stylesheet: '' }) %>
+
+<%
+    const players = createTableComponent(include, "playerstable", {
+        items: teamData.squad.map(member => ({
+            shirtNumber: (member.shirtNumber != null ? member.shirtNumber : ""),
+            name: `<a href="/player/${member.id}">${member.name}</a>`,
+            position: member.position ? member.position : {"COACH": "Coach", "ASSISTANT_COACH": "Assistant Coach"}[member.role],
+            nationality: member.nationality,
+        }))
+    }, {paginateBy: "position", defaultPage: "Coach"});
+%>
+
+<body>
+    <%- include("components/navbar") %>
+
+    <h1>
+        <%= teamData.name %>
+        <img height="50" src="<%= teamData.crestUrl %>" />
+    </h1>
+    <%= //JSON.stringify(teamData); %>
+
+    <h3>
+        <%- teamData.activeCompetitions.map(comp => ` <a href="/competition/${comp.id}">${comp.name}</a>`).toString(); %>
+    </h3>
+
+    <%- include("components/DiscussionLink") %>
+
+    <%- players.tableOutput %>
+
+    <%- include("components/Footer") %>
+
+    <%- players.scriptOutput %>
+
+</body>
+
+</html>

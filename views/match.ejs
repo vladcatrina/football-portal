@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<%- include("components/head", { title: "Match", stylesheet: '' }) %>
+
+<body>
+    <%- include("components/navbar") %>
+
+    <%= //JSON.stringify(matchData); %>
+    <% const { match } = matchData; %>
+    <div class="data-container">
+        <h3>
+            <%- `<a href="/team/${match.homeTeam.id}">${match.homeTeam.name}</a> ${match.score.fullTime.homeTeam ? match.score.fullTime.homeTeam : "-"} - ${match.score.fullTime.awayTeam ? match.score.fullTime.awayTeam : "-"} <a href="/team/${match.awayTeam.id}">${match.awayTeam.name}</a>` %>
+        </h3>
+
+        <div>
+            <%= match.venue %>
+        </div>
+        <div>
+            <%= formatDate(new Date(match.utcDate)) %>
+        </div>
+    </div>
+
+    <%- include("components/DiscussionLink") %>
+    <%- include("components/Footer") %>
+
+</body>
+
+</html>

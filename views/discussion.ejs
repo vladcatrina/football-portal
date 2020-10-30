@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<%- include("components/Head", { title: `Forum`, stylesheet: 'discussion.css' }) %>
+
+<body>
+    <%- include("components/navbar") %>
+
+    <h2>
+        <%= thread.name %>
+    </h2>
+
+    <h4>
+        <a href="<%= `/${thread.parentType}/${thread.parentId}` %>">Info</a>
+    </h4>
+    <% function displayReply(reply, level, address) { %>
+        <div id="<%= address %>" class="reply reply-<%= level % 2 %>">
+            <%= reply.content %>
+            <%= //JSON.stringify(reply) %>
+            <div id="reply-link">
+                <a href="javascript:commentReply('<%= address %>')">Reply</a> | <%= formatDate(new Date(reply.date)) %>
+            </div>
+
+            <% 
+                if (reply.replies) {
+                    reply.replies.forEach((reply, index) => displayReply(reply, level+1, address + "," + index)); 
+                }
+            %>
+        </div>
+    <% } %>
+    <% thread.replies.forEach((reply, index) => displayReply(reply, 0, index)) %>
+
+    <a href="javascript:commentReply('')">Cancel reply</a>
+
+    <form method="POST" action="addcomment">
+        <input id="address" name="address"/>
+        <textarea name="content" id ="content"></textarea>
+        <button type="submit">Submit</button>
+    </form>
+
+    <script>
+        function commentReply(address) {
+            const addressInput = document.getElementById("address");
+            addressInput.setAttribute("value", address);
+
+            const prevSelected = document.getElementsByClassName("selected")[0];
+            if (prevSelected) {
+                prevSelected.classList.toggle("selected");
+            }
+            const selectedDiv = document.getElementById(address);
+            if (selectedDiv) {
+                selectedDiv.classList.toggle("selected");
+            }
+        }
+    </script>
+
+    <%- include("components/Footer") %>
+</body>
+
+</html>

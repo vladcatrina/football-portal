@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<%- include("components/Head", { title: "Home", stylesheet: "index.css" }) %>
+
+<body>
+    <%- include("components/Navbar") %>
+
+    <div class="competition-card-container">
+        <%= //JSON.stringify(competitions) %>
+        <% competitions.forEach(comp => { %>
+            <div class="competition-card">
+                <div>
+                    <a href="/competition/<%= comp.id %>"><%- comp.name %></a>
+                </div>
+                <div><%- comp.area.name %></div>
+                <%= //JSON.stringify(comp) %>
+            </div>
+        <% }) %>
+    </div>
+
+    <%- include("components/Footer") %>
+
+</body>
+
+</html>

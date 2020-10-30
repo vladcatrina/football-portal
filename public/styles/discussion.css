@@ -1,0 +1,30 @@
+.reply {
+    padding: 8px 8px 8px 24px;
+    margin: 8px 0;
+}
+
+.reply-0 {
+    background-color: white;
+}
+
+.reply-1 {
+    background-color: #efefef;
+}
+
+.selected {
+    background-color: rgb(229, 229, 160);
+}
+
+input#address {
+    display: none;
+}
+
+.reply {
+    box-shadow: 1px 1px 2px 1px rgb(0, 0, 0, 0.1);
+}
+
+#reply-link {
+    font-size: smaller;
+    color: #555;
+    opacity: 0.6;
+}

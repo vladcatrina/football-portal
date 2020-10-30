@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<%- include("components/Head", { title: `Forum`, stylesheet: 'forum.css' }) %>
+
+<body>
+    <%- include("components/Navbar") %>
+
+    <%= //JSON.stringify(threads) %>
+    <% 
+    const threadTable = createTableComponent(include, "threadTable", {
+        items: threads.map((thread, index) => ({
+            name: `<a href="/${thread.parentType}/${thread.parentId}/discussion">${thread.name}</a>`,
+            date: formatDate(new Date(thread.date)),
+            replies: `${thread.repliesNumber}✉`,
+            page: Math.floor(index / 5) + 1,
+        }))
+    }, {paginateBy: "page", limitCols: 3})
+    %> 
+    
+    <%- threadTable.tableOutput %>
+
+    <%- include("components/Footer") %>
+
+    <%- threadTable.scriptOutput %>
+</body>
+
+</html>

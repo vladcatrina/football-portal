@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<%- include("components/head", { title: `Player - ${playerData.name}`, stylesheet: '' }) %>
+
+<%
+    const matches = createTableComponent(include, "matchestable", {
+        items: matchesData.matches.map(match => {
+            const age = new Date().valueOf() - new Date(match.utcDate).valueOf();
+            const ageMonths = Math.floor( age / 604800000 / 4);
+            return  {
+                homeTeam: `<a href="/team/${match.homeTeam.id}">${match.homeTeam.name}</a>`,
+                score: `<a href="/match/${match.id}">${match.score.fullTime.homeTeam !== null ? match.score.fullTime.homeTeam : "-"} - ${match.score.fullTime.awayTeam != null ? match.score.fullTime.awayTeam : "-"}</a>`,
+                awayTeam: `<a href="/team/${match.awayTeam.id}">${match.awayTeam.name}</a>`,
+                date: `<span class="date">${formatDate(new Date(match.utcDate))}</span>`,
+                competition: `<a href="/competition/${match.competition.id}">${match.competition.name}</a>`,
+                agePage: ageMonths === 0 ? "last month" : `${ageMonths} month${ageMonths > 1 ? "s" : ""} ago`
+            }
+        }),
+    }, { paginateBy: "agePage", limitCols: 5 });
+%>
+
+<body>
+    <%- include("components/navbar") %>
+
+    <h1>
+        <%= playerData.name %>
+    </h1>
+
+    <h3>
+        <%= playerData.position %> | <%= playerData.nationality %>
+    </h3>
+
+    <%- include("components/DiscussionLink") %>
+    <%= //JSON.stringify(playerData); %>
+    <%= //JSON.stringify(matchesData); %>
+
+    <div>
+        <%- matches.tableOutput %>
+    </div>
+
+    <%- include("components/Footer") %>
+    <%- matches.scriptOutput %>
+
+</body>
+
+</html>

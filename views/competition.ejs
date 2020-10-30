@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<%- include("components/Head", { title: `Competition - ${standingsData.competition.name}`, stylesheet: "competition.css" }) %>
+
+<%= //JSON.stringify(standingsData) %>
+
+<% 
+//merge groups
+    let standingsArr = [];
+    standingsData.standings.forEach(group => {
+        let newArr = group.table.map(groupMember => ({...groupMember, group: group.group}));
+        standingsArr = standingsArr.concat(newArr);
+    });
+%>
+
+<% 
+    const standings = createTableComponent(include, "standingstable", {
+        items: standingsArr.map(item => {
+            const {position, team, playedGames, won, draw, lost, goalsFor, goalsAgainst, goalDifference, points, group} = item;
+            return {
+                position, 
+                crest: `<image height="30" src="${team.crestUrl}"/>`, 
+                team: `<a href="/team/${team.id}">${team.name}</a>`, 
+                playedGames, 
+                won, 
+                draw, 
+                lost, 
+                goalsFor, 
+                goalsAgainst, 
+                goalDifference, 
+                points,
+                group: {
+                    "GROUP_A": "Group A",
+                    "GROUP_B": "Group B",
+                    "GROUP_C": "Group C",
+                    "GROUP_D": "Group D",
+                    "GROUP_E": "Group E",
+                    "GROUP_F": "Group F",
+                    "GROUP_G": "Group G",
+                    "GROUP_H": "Group H",
+                }[group]
+            };
+        }),
+        header: ["#", "", "Team", "M", "W", "D", "L", "GF", "GA", "GD", "Pts"]
+    }, {paginateBy: "group", limitCols: 11});
+
+    const matches = createTableComponent(include, "matchestable", {
+        items: matchesData.matches.map(match => ({
+            homeTeam: `<a href="/team/${match.homeTeam.id}">${match.homeTeam.name}</a>`,
+            score: `<a href="/match/${match.id}">${match.score.fullTime.homeTeam !== null ? match.score.fullTime.homeTeam : "-"} - ${match.score.fullTime.awayTeam != null ? match.score.fullTime.awayTeam : "-"}</a>`,
+            awayTeam: `<a href="/team/${match.awayTeam.id}">${match.awayTeam.name}</a>`,
+            date: `<span class="date">${formatDate(new Date(match.utcDate))}</span>`,
+            page: match.matchday ? match.matchday : (match.group ? match.group : {"PLAY_OFF_ROUND" : "Play-Off Round"}[match.stage]),
+            dateMs: (new Date(match.utcDate)).valueOf() / 1000
+        })),
+    }, {paginateBy: "page", defaultPage: standingsData.season.currentMatchday, sortBy: "dateMs", limitCols: 4});
+%>
+
+<body>
+    <%- include("components/navbar") %>
+
+    <h1>
+        <%= standingsData.competition.name %>
+    </h1>
+
+    <%- include("components/DiscussionLink") %>
+
+    <div id="competition-container">
+        <%-    
+            standings.tableOutput;
+        %>
+
+        <%- 
+            matches.tableOutput;    
+        %>
+    </div>
+
+    <div>
+        <%= //JSON.stringify(matchesData) %>
+    </div>
+    
+    <%- include("components/Footer") %>
+
+    <%- matches.scriptOutput; %>
+    <%- standings.scriptOutput; %>
+
+    <script>
+        const activeButton = document.getElementsByClassName('matchestable-btn-<%= standingsData.season.currentMatchday %>')[0];
+        activeButton.classList.toggle('current-matchday');
+    </script>
+
+</body>
+
+</html>

@@ -1,0 +1,26 @@
+<script>
+    let <%= name %>State = {
+        activePage: <%- defaultPage ? `"${defaultPage}"` : "null" %>
+    };
+
+    function <%= name %>ToggleVisible(index) {
+        const activePageTable = document.getElementsByClassName("<%= name %>-page-" + index)[0];
+        if (activePageTable) {
+            activePageTable.classList.toggle("visible");
+        }
+
+        const activeBtn = document.getElementsByClassName("<%= name %>-btn-" + index)[0];
+        if (activeBtn) {
+            activeBtn.classList.toggle("active");
+        }
+    }
+
+    function <%= name %>SetActive(index) {
+        <%= name %>ToggleVisible(<%= name %>State.activePage);
+        <%= name %>State.activePage = index;
+        <%= name %>ToggleVisible(<%= name %>State.activePage);
+    }
+
+    <%= name %>ToggleVisible(<%= name %>State.activePage);
+
+</script>

@@ -1,0 +1,19 @@
+.competition-card-container {
+  height: 100%;
+  width: 100%;
+}
+.competition-card {
+  border: solid 1px #eee;
+  border-radius: 12px;
+  background-color: #efefef;
+  margin: 4% 4% 4% 0;
+  min-width: 20%;
+  display: inline-block;
+  padding: 12px;
+  box-shadow: 1px 1px 2px 1px rgb(0, 0, 0, 0.1);
+  font-size: larger;
+}
+
+.competition-card:hover {
+  background-color: #ffffff;
+}
