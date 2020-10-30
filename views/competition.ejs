@@ -48,7 +48,7 @@
     const matches = createTableComponent(include, "matchestable", {
         items: matchesData.matches.map(match => ({
             homeTeam: `<a href="/team/${match.homeTeam.id}">${match.homeTeam.name}</a>`,
-            score: `<a href="/match/${match.id}">${match.score.fullTime.homeTeam !== null ? match.score.fullTime.homeTeam : "-"} - ${match.score.fullTime.awayTeam != null ? match.score.fullTime.awayTeam : "-"}</a>`,
+            score: `<a href="/match/${match.id}">${match.score.fullTime.homeTeam != null ? match.score.fullTime.homeTeam : "-"} - ${match.score.fullTime.awayTeam != null ? match.score.fullTime.awayTeam : "-"}</a>`,
             awayTeam: `<a href="/team/${match.awayTeam.id}">${match.awayTeam.name}</a>`,
             date: `<span class="date">${formatDate(new Date(match.utcDate))}</span>`,
             page: match.matchday ? match.matchday : (match.group ? match.group : {"PLAY_OFF_ROUND" : "Play-Off Round"}[match.stage]),

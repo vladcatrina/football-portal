@@ -10,7 +10,7 @@
             const ageMonths = Math.floor( age / 604800000 / 4);
             return  {
                 homeTeam: `<a href="/team/${match.homeTeam.id}">${match.homeTeam.name}</a>`,
-                score: `<a href="/match/${match.id}">${match.score.fullTime.homeTeam !== null ? match.score.fullTime.homeTeam : "-"} - ${match.score.fullTime.awayTeam != null ? match.score.fullTime.awayTeam : "-"}</a>`,
+                score: `<a href="/match/${match.id}">${match.score.fullTime.homeTeam != null ? match.score.fullTime.homeTeam : "-"} - ${match.score.fullTime.awayTeam != null ? match.score.fullTime.awayTeam : "-"}</a>`,
                 awayTeam: `<a href="/team/${match.awayTeam.id}">${match.awayTeam.name}</a>`,
                 date: `<span class="date">${formatDate(new Date(match.utcDate))}</span>`,
                 competition: `<a href="/competition/${match.competition.id}">${match.competition.name}</a>`,

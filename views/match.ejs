@@ -10,7 +10,7 @@
     <% const { match } = matchData; %>
     <div class="data-container">
         <h3>
-            <%- `<a href="/team/${match.homeTeam.id}">${match.homeTeam.name}</a> ${match.score.fullTime.homeTeam ? match.score.fullTime.homeTeam : "-"} - ${match.score.fullTime.awayTeam ? match.score.fullTime.awayTeam : "-"} <a href="/team/${match.awayTeam.id}">${match.awayTeam.name}</a>` %>
+            <%- `<a href="/team/${match.homeTeam.id}">${match.homeTeam.name}</a> ${match.score.fullTime.homeTeam != null ? match.score.fullTime.homeTeam : "-"} - ${match.score.fullTime.awayTeam != null ? match.score.fullTime.awayTeam : "-"} <a href="/team/${match.awayTeam.id}">${match.awayTeam.name}</a>` %>
         </h3>
 
         <div>
