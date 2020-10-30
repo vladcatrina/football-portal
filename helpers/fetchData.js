@@ -1,5 +1,5 @@
 const request = require("request");
-const FOOTBALL_API_TOKEN = "779b2f1d64e74627b56f46fb8ba3ed31";
+const FOOTBALL_API_TOKEN = require("../config").apiToken;
 const FOOTBALL_API_ADDRESS = "https://api.football-data.org/v2";
 const Cache = require("./Cache");
 
